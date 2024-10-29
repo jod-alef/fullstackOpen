@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->browser: Creates and submits payload using POST {note: Final}
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->browser: CSS File
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->browser: JavaScript File
+    deactivate server
+
+    Note right of browser: The browser runs the JavaScript to load new_note to the JSON file
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->browser: JSON File [{content: "" date:"2024-10-29T03:39:36.177Z"}, ... ]
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders all the notes and dates, including the new_note using the JSON file
+    
